@@ -4,7 +4,7 @@ First post! This blog is pretty cool, don't you think :D
 
 Anyways, let's talk about topic of this blog---**matrix exponentiation**. Matrix exponentiation is basically a way to solve linear recurrences in $O(\log n)$ time. To see what this means, let's take a look at a prototypical matrix exponentiation problem: [CSES Fibonacci Numbers](https://cses.fi/problemset/task/1722).
 
-> Let $F_0=0$, $F_1=1$, and $F_n=F_{n-1}+F_{n-2}$. Given $n$ ($0\leq n\leq 10^{18}$), calculate $F_n\mod 10^9+7$.
+> Let $F_0=0$, $F_1=1$, and $F_n=F_{n-1}+F_{n-2}$. Given $n$ $\left(0\leq n\leq 10^{18}\right)$, calculate $F_n\mod 10^9+7$.
 
 At first, this problem seems intractable. We obviously can't just use recursion or iteration to get to $F_n$, because $n$ can be up to $10^{18}$. We can't use an $O(1)$ Fibonacci formula either, since we're asked for the answer mod $10^9+7$, which requires exact precision. Instead, we make use of the following key idea.
 
@@ -32,7 +32,11 @@ It might seem like this matrix multiplication is the same as just calculating ea
 
 **Key Idea:** Matrix multiplication is *associative*, meaning that it doesn't matter which multiplications we do first.
 
-This idea means that we can calculate $M=\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^n$ first before multiplying the "initial state" matrix by $M$. And calculating something to the power of $n$ can be done in $O(\log n)$ time using [binary exponentiation](https://cp-algorithms.com/algebra/binary-exp.html)!
+This idea means that we can calculate
+
+$$M=\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^n$$
+
+first before multiplying the "initial state" matrix by $M$. And calculating something to the power of $n$ can be done in $O(\log n)$ time using [binary exponentiation](https://cp-algorithms.com/algebra/binary-exp.html)!
 
 Once we compute $M$ using binary exponentiation, we can just read off the answer:
 
