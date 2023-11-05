@@ -1,0 +1,16 @@
+title: "Anthony's ISP Blog"
+author: "Anthony Xu"
+description: "A blog for my senior Independent Study Project about competitive programming."
+theme: "minima"
+baseurl: "/isp-blog"
+
+titles_from_headings:
+  strip_title: true
+  collections: true
+
+defaults:
+  - scope:
+      path: ""
+      type: post
+    values:
+      tags: Other
