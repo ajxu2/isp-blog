@@ -4,6 +4,8 @@ description: "A blog for my senior Independent Study Project about competitive p
 theme: "minima"
 baseurl: "/isp-blog"
 
+github_username: "ajxu2"
+
 titles_from_headings:
   strip_title: true
   collections: true

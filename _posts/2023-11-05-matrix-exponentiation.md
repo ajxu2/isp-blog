@@ -11,14 +11,21 @@ At first, this problem seems intractable. We obviously can't just use recursion 
 **Key Idea:** An $n\times n$ matrix encodes a linear map of a $1\times n$ matrix. The linear map can be "applied" by [multiplying](https://en.wikipedia.org/wiki/Matrix_multiplication) the $1\times n$ matrix by the $n\times n$ matrix.
 
 For example, the matrix
+
 $$ \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} $$
+
 encodes the map
+
 $$ \begin{pmatrix} a & b \end{pmatrix} \mapsto \begin{pmatrix} 1a+1b & 1a+0b \end{pmatrix} = \begin{pmatrix} a+b & a \end{pmatrix}. $$
+
 This can be seen by just multiplying the two matrices. The $i$th column encodes the coefficients that make up the $i$th element of the row.
 
 But wait. That same matrix can be used to encode the Fibonacci recurrence! Applying it to the first two elements yields
+
 $$ \begin{pmatrix} F_1 & F_0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix}F_1+F_0 & F_1\end{pmatrix} = \begin{pmatrix}F_2 & F_1\end{pmatrix}. $$
+
 Furthermore, we can iterate this multiplication, so that
+
 $$ \begin{pmatrix} F_1 & F_0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^n = \begin{pmatrix}F_{n+1} & F_n\end{pmatrix}. $$
 
 It might seem like this matrix multiplication is the same as just calculating each element, but there's one final trick.
@@ -28,7 +35,9 @@ It might seem like this matrix multiplication is the same as just calculating ea
 This idea means that we can calculate $M=\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^n$ first before multiplying the "initial state" matrix by $M$. And calculating something to the power of $n$ can be done in $O(\log n)$ time using [binary exponentiation](https://cp-algorithms.com/algebra/binary-exp.html)!
 
 Once we compute $M$ using binary exponentiation, we can just read off the answer:
+
 $$ \begin{pmatrix} 1 & 0 \end{pmatrix}M = \begin{pmatrix} M_{11} & M_{12} \end{pmatrix} \implies F_n = M_{12}. $$
+
 (And if you're wondering why we chose to raise the matrix to the power of $n$ rather than $n-1$, it's because this way doesn't need a special case for $n=0$.)
 
 ## Code
@@ -86,8 +95,11 @@ And this passes all test cases on CSES!
 ## Other problems
 
 Of course, it would be misguided to assume that matrix exponentiation can only calculate Fibonacci numbers. It can solve a lot of other linear recurrences. For example, [CSES Throwing Dice](https://cses.fi/problemset/task/1096) has the following recurrence:
+
 $$ dp_i=\begin{cases}0 & i<0 \\ 1 & i=0 \\ \sum_{j=1}^6 dp_{i-j} & i > 0\end{cases} $$
+
 and the answer pops out by calculating
+
 $$ \begin{pmatrix}1 & 0 & 0 & 0 & 0 & 0\end{pmatrix}\begin{pmatrix}1 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0 & 0 & 0 \\ 1 & 0 & 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 & 1 & 0 \\ 1 & 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 & 0\end{pmatrix}^n.$$
 
 Furthermore, [CSES Graph Paths I](https://cses.fi/problemset/task/1723), a seemingly unrelated problem, has a beautifully simple solution: just raise the adjacency matrix to the power of $k$. (This essentially works because the adjacency matrix and the process of matrix multiplication encode the exact elements that need to be added in each stage of the DP.)
