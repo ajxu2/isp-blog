@@ -104,7 +104,7 @@ $$ dp_i=\begin{cases}0 & i<0 \\ 1 & i=0 \\ \sum_{j=1}^6 dp_{i-j} & i > 0\end{cas
 
 and the answer pops out by calculating
 
-$$ \begin{pmatrix}1 & 0 & 0 & 0 & 0 & 0\end{pmatrix}\begin{pmatrix}1 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0 & 0 & 0 \\ 1 & 0 & 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 & 1 & 0 \\ 1 & 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 & 0\end{pmatrix}^n.$$
+$$ \begin{pmatrix}1 & 0 & 0 & 0 & 0 & 0\end{pmatrix}\begin{pmatrix}1 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0 & 0 & 0 \\ 1 & 0 & 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 & 1 & 0 \\ 1 & 0 & 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 & 0 & 0\end{pmatrix}^n.$$
 
 Furthermore, [CSES Graph Paths I](https://cses.fi/problemset/task/1723), a seemingly unrelated problem, has a beautifully simple solution: just raise the adjacency matrix to the power of $k$. (This essentially works because the adjacency matrix and the process of matrix multiplication encode the exact elements that need to be added in each stage of the DP.)
 
